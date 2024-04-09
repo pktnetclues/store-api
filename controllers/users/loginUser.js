@@ -35,6 +35,7 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ message: "wrong password" });
     } else {
       const oneDayMilliseconds = 24 * 60 * 60 * 1000;
+      const expirationDate = new Date(Date.now() + oneDayMilliseconds);
       return jwt.sign(
         {
           userId: getUser[0].userId,
@@ -47,12 +48,19 @@ const loginUser = async (req, res) => {
           roleName: getUser[0].roleName,
         },
         process.env.JWT_SECRET,
-        { expiresIn: oneDayMilliseconds },
+
         (err, token) => {
           if (err) {
             return res.status(500).json({ message: err.message });
           }
-          return res.status(200).json({ message: "success", token });
+          return res
+            .status(200)
+            .cookie("token", token, {
+              httpOnly: true,
+              secure: true,
+              expires: expirationDate,
+            })
+            .json({ message: "success", token });
         }
       );
     }

@@ -20,8 +20,8 @@ userRoutes.post("/login/user", loginUser);
 
 // userRoutes.delete("/delete/admin/:id", deleteAdmin);
 
-// userRoutes.get("/profile/admin", authMiddleware, (req, res) => {
-//   res.status(200).json({ message: "success", user: req.admin });
-// });
+userRoutes.get("/profile/user", authMiddleware, (req, res) => {
+  res.status(200).json({ message: "success", user: req.user });
+});
 
 module.exports = userRoutes;
