@@ -3,6 +3,7 @@ const fileHandleMiddleware = require("../middleware/fileHandleMiddleware");
 const registerUser = require("../controllers/users/registerUser");
 const loginUser = require("../controllers/users/loginUser");
 const authMiddleware = require("../middleware/authMiddleware");
+const deleteUser = require("../controllers/users/deleteUser");
 
 const userRoutes = express.Router();
 
@@ -16,10 +17,9 @@ userRoutes.post(
 // Login User
 userRoutes.post("/login/user", loginUser);
 
-// userRoutes.get("/logout/admin", logoutAdmin);
+userRoutes.delete("/delete/user/:id", authMiddleware, deleteUser);
 
-// userRoutes.delete("/delete/admin/:id", deleteAdmin);
-
+// Get User Profile
 userRoutes.get("/profile/user", authMiddleware, (req, res) => {
   res.status(200).json({ message: "success", user: req.user });
 });

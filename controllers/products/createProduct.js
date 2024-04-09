@@ -9,8 +9,6 @@ const createProduct = async (req, res) => {
       ? req.files.map((file) => file.filename)
       : null;
 
-    console.log(req.files);
-
     // Validate required fields
     if (
       !productName ||

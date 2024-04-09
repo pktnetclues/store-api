@@ -8,7 +8,7 @@ const sequelize = new Sequelize("store", "root", "", {
 sequelize
   .authenticate()
   .then(() => {
-    console.log("Connected to Library database");
+    console.log("Connected to Store database");
   })
   .catch((error) => {
     console.error("Unable to connect to the database:", error);
