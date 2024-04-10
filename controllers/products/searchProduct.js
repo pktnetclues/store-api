@@ -10,25 +10,24 @@ const searchProduct = async (req, res) => {
 
   try {
     if (userRole === "admin") {
-      [productResult] = await sequelize.query(
-        `SELECT DISTINCT p.productId, p.productName, p.productDesc, p.productPrice, p.productImages, c.categoryName FROM products AS p LEFT JOIN categories AS c ON p.categoryId = c.categoryId WHERE p.productName LIKE :searchQuery OR p.productDesc LIKE :searchQuery`,
+      productResult = await sequelize.query(
+        `SELECT DISTINCT p.productId, p.productName, p.productDesc, p.productPrice, p.productImages, c.categoryName FROM products AS p LEFT JOIN categories AS c ON p.categoryId = c.categoryId WHERE LOWER(p.productName) LIKE :searchQuery OR LOWER(p.productDesc) LIKE :searchQuery`,
         {
+          replacements: { searchQuery: `%${searchQuery}%` },
           type: QueryTypes.SELECT,
         }
       );
     } else {
-      [productResult] = await sequelize.query(
-        `SELECT DISTINCT p.productId, p.productName, p.productDesc, p.productPrice, p.productImages, c.categoryName FROM products AS p LEFT JOIN categories AS c ON p.categoryId = c.categoryId WHERE (p.productName LIKE :searchQuery OR p.productDesc LIKE :searchQuery) AND p.createdBy = :createdBy`,
+      productResult = await sequelize.query(
+        `SELECT DISTINCT p.productId, p.productName, p.productDesc, p.productPrice, p.productImages, c.categoryName FROM products AS p LEFT JOIN categories AS c ON p.categoryId = c.categoryId WHERE (LOWER(p.productName) LIKE :searchQuery OR LOWER(p.productDesc) LIKE :searchQuery) AND p.createdBy = :createdBy`,
         {
+          replacements: { searchQuery: `%${searchQuery}%`, createdBy },
           type: QueryTypes.SELECT,
-          replacements: { searchQuery, createdBy },
         }
       );
     }
 
-    console.log(productResult);
-
-    if (!productResult) {
+    if (productResult.length === 0) {
       return res.status(404).json({ message: "No products found" });
     }
 

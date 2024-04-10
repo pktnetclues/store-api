@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 07, 2024 at 05:13 PM
+-- Generation Time: Apr 10, 2024 at 05:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -39,10 +39,13 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`categoryId`, `categoryName`, `createdBy`, `createdAt`) VALUES
-(4, 'TV', 16, '2024-04-06 07:33:59'),
+(1, 'Gaming', 15, '2024-04-10 12:03:15'),
+(2, 'Medical', 16, '2024-04-10 12:03:52'),
+(3, 'Laptop', 15, '2024-04-10 12:45:01'),
+(4, 'TV', 15, '2024-04-06 07:33:59'),
 (5, 'Smartphone', 15, '2024-04-06 10:59:45'),
 (6, 'Earbuds', 15, '2024-04-06 12:45:35'),
-(7, 'Appliances', 16, '2024-04-06 14:38:16');
+(7, 'Appliances', 15, '2024-04-06 14:38:16');
 
 -- --------------------------------------------------------
 
@@ -65,10 +68,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`productId`, `productName`, `productDesc`, `productPrice`, `categoryId`, `createdBy`, `productImages`) VALUES
-(2, 'Iphone 14 Pro', 'The iPhone 14 Pro is a smartphone with a 6.1-inch Super Retina XDR OLED display, a 2,000,000:1 contrast ratio, and a refresh rate of 60 Hz. It has a resolution of 2532 × 1170 pixels and a pixel density of about 460 PPI. The iPhone 14 has rounded corners that follow a curved design, and the screen is 6.06 inches diagonally when measured as a standard rectangular shape.', 59000, 5, 15, '[\"26cbebd24cef87b8-psp-pankaj.jpg\"]'),
-(3, 'Iphone 15', 'The iPhone 15 is a smartphone with a 6.1-inch Super Retina XDR OLED display, a 2,000,000:1 contrast ratio, and a refresh rate of 60 Hz. It has a resolution of 2532 × 1170 pixels and a pixel density of about 460 PPI. The iPhone 14 has rounded corners that follow a curved design, and the screen is 6.06 inches diagonally when measured as a standard rectangular shape.', 80000, 5, 15, '[\"85a6d37c7cc30858-psp-pankaj.jpg\",\"1e2af405d180b8e6-Screenshot from 2024-03-31 12-02-52.png\"]'),
-(4, 'Airpods Pro', 'Apple\'s AirPods Pro are wireless, in-ear headphones that offer premium features like noise cancellation, 3D sound, and an ergonomic design. The second generation AirPods Pro have improved active noise cancellation, battery life, and the ability to adjust volume directly from the earbuds. The H1-powered AirPods Pro also feature Adaptive Audio, which automatically prioritizes sounds that need your attention as you move around. Apple AirPods Pro (2nd generation) The H2-powered AirPods Pro now feature Adaptive Audio, automatically prioritising sounds that need your attention as you move through the world. By seamlessly blending Active Noise Cancellation with Transparency mode when you need it, Adaptive Audio magically delivers the right mix of sound for any environment ... Wikipedia AirPods Pro - Wikipedia AirPods Pro are wireless Bluetooth in-ear headphones designed by Apple, initially introduced on October 30, 2019. They are Apple\'s mid-range wireless headphones, available alongside the base-level AirPods and the highest-end AirPods Max. Apple Inc. apple.com AirPods Pro (2nd generation) - Apple It uses computational algorithms to deliver noise cancellation, superior three-dimensional sound, and efficient battery life — all at once. AirPods Pro will pair with Apple Vision Pro to deliver Lossless Audio with ultra-low latency, for an unprecedented sound experience. The Verge Apple AirPods Pro (second-gen) review: same look, better ... 28 Sept 2022 — The second-gen AirPods Pro sound better. Their active noise cancellation is noticeably improved. You can now adjust the volume directly from the earbuds. And the charging case has gained a built-in speaker and pinpoint location tracking that makes it easier to find. Battery life is also slightly longer than before. For legions of loyal Apple customers, these changes are exciting — even if the outer design is old hat. So the second reaction has been along the lines of “these are what I\'ve been waiting for.” cnn.com 5 things the AirPods Pro do better than any other wireless earbuds - CNN 20 Jul 2023 — Both the original AirPods Pro and AirPods Pro 2 are some of the best true wireless earbuds in existence. They set the standard for premium earbuds, with excellent active noise cancellation (ANC) and striking 3D sound in an ergonomic design. Here are some more features of the AirPods Pro: Spatial Audio: Gyroscopes in the earpieces allow users to move their head around within an audio space Lossless Audio: Pairs with Apple Vision Pro to deliver ultra-low latency Adaptive Audio: Seamlessly blends Active Noise Cancellation with Transparency mode to deliver the right mix of sound for any environment Here are some controls for controlling audio content: Play and pause: Press the Digital Crown Play the next track: Double-click the Digital Crown Play the previous track: Triple-click the Digital Crown Adjust the volume: Turn the Digital Crown Switch between Noise Cancellation and Transparency mode: Press the noise control button What is the physical description of AirPods? What are the hidden features of AirPods Pro? How do I use AirPods Pro features? Ask a follow up', 30000, 6, 15, '[\"c7e972f29021e03f-psp-pankaj.jpg\",\"4df5cc8058f07b7c-Screenshot from 2024-03-31 12-02-52.png\"]'),
-(10, 'Airpods Pro', 'Apple\'s AirPods Pro are wireless, in-ear headphones that offer premium features like noise cancellation, 3D sound, and an ergonomic design. The second generation AirPods Pro have improved active noise cancellation, battery life, and the ability to adjust volume directly from the earbuds. The H1-powered AirPods Pro also feature Adaptive Audio, which automatically prioritizes sounds that need your attention as you move around. Apple AirPods Pro (2nd generation) The H2-powered AirPods Pro now feature Adaptive Audio, automatically prioritising sounds that need your attention as you move through the world. By seamlessly blending Active Noise Cancellation with Transparency mode when you need it, Adaptive Audio magically delivers the right mix of sound for any environment ... Wikipedia AirPods Pro - Wikipedia AirPods Pro are wireless Bluetooth in-ear headphones designed by Apple, initially introduced on October 30, 2019. They are Apple\'s mid-range wireless headphones, available alongside the base-level AirPods and the highest-end AirPods Max. Apple Inc. apple.com AirPods Pro (2nd generation) - Apple It uses computational algorithms to deliver noise cancellation, superior three-dimensional sound, and efficient battery life — all at once. AirPods Pro will pair with Apple Vision Pro to deliver Lossless Audio with ultra-low latency, for an unprecedented sound experience. The Verge Apple AirPods Pro (second-gen) review: same look, better ... 28 Sept 2022 — The second-gen AirPods Pro sound better. Their active noise cancellation is noticeably improved. You can now adjust the volume directly from the earbuds. And the charging case has gained a built-in speaker and pinpoint location tracking that makes it easier to find. Battery life is also slightly longer than before. For legions of loyal Apple customers, these changes are exciting — even if the outer design is old hat. So the second reaction has been along the lines of “these are what I\'ve been waiting for.” cnn.com 5 things the AirPods Pro do better than any other wireless earbuds - CNN 20 Jul 2023 — Both the original AirPods Pro and AirPods Pro 2 are some of the best true wireless earbuds in existence. They set the standard for premium earbuds, with excellent active noise cancellation (ANC) and striking 3D sound in an ergonomic design. Here are some more features of the AirPods Pro: Spatial Audio: Gyroscopes in the earpieces allow users to move their head around within an audio space Lossless Audio: Pairs with Apple Vision Pro to deliver ultra-low latency Adaptive Audio: Seamlessly blends Active Noise Cancellation with Transparency mode to deliver the right mix of sound for any environment Here are some controls for controlling audio content: Play and pause: Press the Digital Crown Play the next track: Double-click the Digital Crown Play the previous track: Triple-click the Digital Crown Adjust the volume: Turn the Digital Crown Switch between Noise Cancellation and Transparency mode: Press the noise control button What is the physical description of AirPods? What are the hidden features of AirPods Pro? How do I use AirPods Pro features? Ask a follow up', 30000, 6, 15, '[\"669e547fa7bcbe49-psp-pankaj.jpg\",\"cf13fef55bfe9a0f-Screenshot from 2024-03-31 12-02-52.png\"]');
+(11, 'AirPods Pro (2nd generation)', 'Custom high-excursion Apple driver\r\nCustom high dynamic range amplifier\r\nAdaptive Audio1\r\nActive Noise Cancellation\r\nTransparency mode\r\nConversation Awareness1\r\nPersonalised Volume1\r\nLoud Noise Reduction\r\nVent system for pressure equalisation\r\nPersonalised Spatial Audio with dynamic head tracking2\r\nAdaptive EQ', 24990, 1, 15, '[\"e6360a125298e584-airpods pro.jpeg\",\"63457c6f57ea3e28-airpods__ea3kvnhxv96q_large.jpg\"]'),
+(12, 'MacBook Pro', 'Apple M3 chip with 8-core CPU, 10-core GPU, 16-core Neural Engine\r\n8GB unified memory\r\n512GB SSD storage\r\n35.97 cm (14.2\") Liquid Retina XDR display²\r\n70W USB-C Power Adapter\r\nTwo Thunderbolt / USB 4 ports, HDMI port, SDXC card slot, headphone jack, MagSafe 3 port\r\nBacklit Magic Keyboard with Touch ID - US English', 180000, 3, 15, '[\"849a637c7937ea2c-mbp14-spacegray-gallery2-202310.jpeg\"]'),
+(13, 'iPhone 15 Pro', 'Apple iPhone 15 Pro mobile was launched on 12th September 2023. The phone comes with a 120 Hz refresh rate 6.10-inch touchscreen display offering a resolution of 1179x2556 pixels at a pixel density of 460 pixels per inch (ppi). Apple iPhone 15 Pro is powered by a hexa-core Apple A17 Pro processor. It comes with 8GB of RAM. The Apple iPhone 15 Pro supports wireless charging.', 134900, 5, 15, '[\"ac4ca9373341bf03-iphone-15-pro-finish-select-202309-6-1inch_AV1.jpeg\",\"ed373598efe6eec6-iphone-15-pro-finish-select-202309-6-1inch_AV2_GEO_EMEA.jpeg\"]');
 
 -- --------------------------------------------------------
 
@@ -88,7 +90,12 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`roleId`, `roleName`, `userId`) VALUES
 (12, 'user', 15),
-(13, 'admin', 16);
+(13, 'admin', 16),
+(14, 'user', 17),
+(15, 'user', 18),
+(16, 'user', 19),
+(17, 'user', 20),
+(18, 'user', 21);
 
 -- --------------------------------------------------------
 
@@ -114,8 +121,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userId`, `firstName`, `lastName`, `email`, `password`, `gender`, `hobbies`, `roleName`, `profilePic`, `createdAt`) VALUES
-(15, 'Pankaj', 'Thakur', 'pk@gmail.com', '$2b$10$zqYJUmFwJT0uMAdleatdLeLnaLjZJjzj8FfrEMRM3X89eJ7q7OUSa', 'Male', 'Coding, Gaming', 'user', 'ad0fce8916f3ff02-psp-pankaj.jpg', '2024-04-06 05:57:27'),
-(16, 'Pankaj', 'Thakur', 'pkt@gmail.com', '$2b$10$ytuohxRUljJ.jPIuxNbF0eiBravJB1KXu0J3w9NgI7VUGqBEDxa6.', 'Male', 'Coding, Gaming', 'admin', '5bc75314f822ac51-psp-pankaj.jpg', '2024-04-06 07:32:25');
+(15, 'Pankaj', 'Kumar', 'pk@gmail.com', '$2b$10$55rC/0vt7jKhAU587fi3D.gJsGVYIDDzginsmvkJk0hpa9fTEYL9e', 'Male', 'Coding, Cricket, Gaming', 'user', '9b30a0ddeb804c2c-372497217777264 (1).png', '2024-04-10 11:19:00');
 
 --
 -- Indexes for dumped tables
@@ -160,19 +166,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productId` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `productId` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `roleId` tinyint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `roleId` tinyint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `userId` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

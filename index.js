@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Static Files
-app.use("/assets", express.static(__dirname + "/public/assets/profilePics"));
+app.use("/assets", express.static(__dirname + "/public/assets"));
 
 // Cors
 app.use(
