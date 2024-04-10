@@ -33,17 +33,24 @@ const createProduct = async (req, res) => {
 
     if (!categoryId) {
       // Create new category if not found
-      await sequelize
-        .query(
-          `INSERT INTO categories (categoryName, createdBy) VALUES (:categoryName, :createdBy)`,
-          {
-            replacements: { categoryName, createdBy },
-            type: QueryTypes.INSERT,
-          }
-        )
-        .then(([results, metadata]) => {
-          categoryId = metadata.lastInsertId;
-        });
+      await sequelize.query(
+        `INSERT INTO categories (categoryName, createdBy) VALUES (:categoryName, :createdBy)`,
+        {
+          replacements: { categoryName, createdBy },
+          type: QueryTypes.INSERT,
+        }
+      );
+
+      const [category] = await sequelize.query(
+        `SELECT categoryId FROM categories WHERE categoryName = :categoryName AND createdBy = :createdBy`,
+        {
+          replacements: { categoryName, createdBy },
+          type: QueryTypes.SELECT,
+        }
+      );
+
+      categoryId = category?.categoryId;
+      console.log(categoryId);
     }
 
     // Create product

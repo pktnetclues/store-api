@@ -5,6 +5,7 @@ const createProduct = require("../controllers/products/createProduct");
 const deleteProduct = require("../controllers/products/deleteProduct");
 const getProductsByUser = require("../controllers/products/getProductsByUser");
 const updateProduct = require("../controllers/products/updateProduct");
+const searchProduct = require("../controllers/products/searchProduct");
 
 const productRoutes = express.Router();
 
@@ -18,6 +19,9 @@ productRoutes.post(
 
 //Get categories by user
 productRoutes.get("/get/products", authMiddleware, getProductsByUser);
+
+//Get categories by user
+productRoutes.get("/search/products", authMiddleware, searchProduct);
 
 //Update product
 productRoutes.put(
