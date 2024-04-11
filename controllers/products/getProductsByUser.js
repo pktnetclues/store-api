@@ -8,12 +8,15 @@ const getProductsByUser = async (req, res) => {
 
   try {
     if (userRole === "admin") {
-      productResult = await sequelize.query(`SELECT * FROM products`, {
-        type: QueryTypes.SELECT,
-      });
+      productResult = await sequelize.query(
+        `SELECT p.productId, p.productName, p.productDesc, p.productPrice, p.productImages, c.categoryName FROM products AS p LEFT JOIN categories AS c ON p.categoryId = c.categoryId`,
+        {
+          type: QueryTypes.SELECT,
+        }
+      );
     } else {
       productResult = await sequelize.query(
-        `SELECT * FROM products WHERE createdBy = :createdBy`,
+        `SELECT p.productId, p.productName, p.productDesc, p.productPrice, p.productImages, c.categoryName FROM products AS p LEFT JOIN categories AS c ON p.categoryId = c.categoryId WHERE p.createBy = :createdBy`,
         {
           replacements: { createdBy },
           type: QueryTypes.SELECT,
