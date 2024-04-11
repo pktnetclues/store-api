@@ -16,7 +16,7 @@ const getProductsByUser = async (req, res) => {
       );
     } else {
       productResult = await sequelize.query(
-        `SELECT p.productId, p.productName, p.productDesc, p.productPrice, p.productImages, c.categoryName FROM products AS p LEFT JOIN categories AS c ON p.categoryId = c.categoryId WHERE p.createBy = :createdBy`,
+        `SELECT p.productId, p.productName, p.productDesc, p.productPrice, p.productImages, c.categoryName FROM products AS p LEFT JOIN categories AS c ON p.categoryId = c.categoryId WHERE p.createdBy = :createdBy`,
         {
           replacements: { createdBy },
           type: QueryTypes.SELECT,
