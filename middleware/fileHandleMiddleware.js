@@ -13,8 +13,18 @@ function ensureFolderExists(folderPath) {
 // Function to determine destination folder dynamically based on the field name
 function getDestination(req, file, cb) {
   const fieldName = file.fieldname;
-  const folderName =
-    fieldName === "profilePic" ? "profilePics" : "productImages";
+
+  let folderName = "";
+  if (fieldName === "pdf") {
+    folderName = "pdfs";
+  } else if (fieldName === "profilePic") {
+    folderName = "profilePics";
+  } else if (fieldName === "productImages") {
+    folderName = "productImages";
+  } else {
+    folderName = "others";
+  }
+
   const destination = `./public/assets/${folderName}/`;
   ensureFolderExists(destination);
   cb(null, destination);
@@ -34,7 +44,7 @@ const storage = multer.diskStorage({
 // Check file type
 function checkFileType(file, cb) {
   // Allowed filetypes
-  const filetypes = /jpeg|jpg|png/;
+  const filetypes = /jpeg|jpg|png|pdf/;
   // Check the extension
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
   // Check the MIME type
