@@ -6,8 +6,6 @@ const sequelize = require("./utils/sequelize");
 const userRoutes = require("./routes/userRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const productRoutes = require("./routes/productRoutes");
-const cookieParser = require("cookie-parser");
-// const cookieParser = require("cookie-parser");
 
 const app = express();
 // Configuring dotenv
@@ -16,7 +14,6 @@ dotenv.config();
 // Middlewares
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 // Static Files
 app.use("/assets", express.static(__dirname + "/public/assets"));
