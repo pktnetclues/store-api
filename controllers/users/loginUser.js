@@ -1,61 +1,67 @@
-const { QueryTypes } = require("sequelize");
 const bcrypt = require("bcrypt");
+const Yup = require("yup");
 const jwt = require("jsonwebtoken");
+const { QueryTypes } = require("sequelize");
 const sequelize = require("../../utils/sequelize");
 
+// Validation schema
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
+
 const loginUser = async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: "email and password are required" });
-  }
-
   try {
+    await validationSchema.validate(req.body, { abortEarly: false });
+    const { email, password } = req.body;
+
     // Checking if the user exists
-    const getUser = await sequelize.query(
-      `SELECT * FROM users WHERE email = :email`,
+    const [getUser] = await sequelize.query(
+      "SELECT users.*, roles.roleName FROM users INNER JOIN roles ON users.roleId = roles.roleId WHERE users.email = ?",
       {
-        replacements: { email },
+        replacements: [email],
         type: QueryTypes.SELECT,
       }
     );
 
-    // Checking if the user exists
-    if (!getUser.length) {
-      return res.status(400).json({ message: "wrong email" });
-    }
+    console.log(getUser);
 
-    // Getting the hashed password from the database
-    const hashedPassword = getUser[0].password;
+    if (!getUser) {
+      return res.status(400).json({ message: "Wrong email" });
+    }
 
     // Comparing the password
-    const validPassword = await bcrypt.compare(password, hashedPassword);
+    const validPassword = await bcrypt.compare(password, getUser.password);
 
     if (!validPassword) {
-      return res.status(400).json({ message: "wrong password" });
-    } else {
-      return jwt.sign(
-        {
-          userId: getUser[0].userId,
-          email: getUser[0].email,
-          firstName: getUser[0].firstName,
-          lastName: getUser[0].lastName,
-          gender: getUser[0].gender,
-          hobbies: getUser[0].hobbies,
-          profilePic: getUser[0].profilePic,
-          roleName: getUser[0].roleName,
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: "1h" },
-        (err, token) => {
-          if (err) {
-            return res.status(500).json({ message: err.message });
-          }
-          return res.status(200).json({ message: "success", token });
-        }
-      );
+      return res.status(400).json({ message: "Wrong password" });
     }
+
+    const token = jwt.sign(
+      {
+        userId: getUser.userId,
+        email: getUser.email,
+        firstName: getUser.firstName,
+        lastName: getUser.lastName,
+        gender: getUser.gender,
+        hobbies: getUser.hobbies,
+        profilePic: getUser.profilePic,
+        roleName: getUser.roleName,
+        verified: getUser.verified,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    return res.status(200).json({ message: "success", token });
   } catch (error) {
+    if (error instanceof Yup.ValidationError) {
+      return res.status(400).json({ message: error.message });
+    }
     return res.status(500).json({ message: error.message });
   }
 };

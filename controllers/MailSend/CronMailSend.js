@@ -4,7 +4,7 @@ const cron = require("node-cron");
 
 const CronMailSend = async () => {
   try {
-    cron.schedule("*0 * * * *", async () => {
+    cron.schedule("*/1 * * * *", async () => {
       await sequelize.query(
         "UPDATE emailCount SET emailCountNo = emailCountNo + 1",
         {

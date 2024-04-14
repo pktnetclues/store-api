@@ -16,7 +16,8 @@ dotenv.config();
 
 // Middlewares
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 // Static Files
 app.use("/assets", express.static(__dirname + "/public/assets"));

@@ -4,6 +4,8 @@ const registerUser = require("../controllers/users/registerUser");
 const loginUser = require("../controllers/users/loginUser");
 const authMiddleware = require("../middleware/authMiddleware");
 const deleteUser = require("../controllers/users/deleteUser");
+const updateUser = require("../controllers/users/updateUser");
+const verifyUser = require("../controllers/users/verifyUser");
 
 const userRoutes = express.Router();
 
@@ -14,10 +16,14 @@ userRoutes.post(
   registerUser
 );
 
+userRoutes.post("/verify/user", verifyUser);
+
 // Login User
 userRoutes.post("/login/user", loginUser);
 
 userRoutes.delete("/delete/user/:id", authMiddleware, deleteUser);
+
+userRoutes.patch("/update/user", authMiddleware, updateUser);
 
 // Get User Profile
 userRoutes.get("/profile/user", authMiddleware, (req, res) => {
