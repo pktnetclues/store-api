@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 10, 2024 at 05:34 PM
+-- Generation Time: Apr 14, 2024 at 04:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -39,13 +39,40 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`categoryId`, `categoryName`, `createdBy`, `createdAt`) VALUES
-(1, 'Gaming', 15, '2024-04-10 12:03:15'),
-(2, 'Medical', 16, '2024-04-10 12:03:52'),
-(3, 'Laptop', 15, '2024-04-10 12:45:01'),
-(4, 'TV', 15, '2024-04-06 07:33:59'),
-(5, 'Smartphone', 15, '2024-04-06 10:59:45'),
-(6, 'Earbuds', 15, '2024-04-06 12:45:35'),
-(7, 'Appliances', 15, '2024-04-06 14:38:16');
+(1, 'EarBuds', 1, '2024-04-13 05:48:44'),
+(21, 'Mobile', 1, '2024-04-14 04:27:56'),
+(22, 'Pankaj', 1, '2024-04-14 04:33:27'),
+(23, 'Java', 40, '2024-04-14 12:32:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `emailCount`
+--
+
+CREATE TABLE `emailCount` (
+  `emailCountNo` smallint(5) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `emailCount`
+--
+
+INSERT INTO `emailCount` (`emailCountNo`) VALUES
+(46);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `otps`
+--
+
+CREATE TABLE `otps` (
+  `otpId` smallint(5) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `otp` bigint(6) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -68,9 +95,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`productId`, `productName`, `productDesc`, `productPrice`, `categoryId`, `createdBy`, `productImages`) VALUES
-(11, 'AirPods Pro (2nd generation)', 'Custom high-excursion Apple driver\r\nCustom high dynamic range amplifier\r\nAdaptive Audio1\r\nActive Noise Cancellation\r\nTransparency mode\r\nConversation Awareness1\r\nPersonalised Volume1\r\nLoud Noise Reduction\r\nVent system for pressure equalisation\r\nPersonalised Spatial Audio with dynamic head tracking2\r\nAdaptive EQ', 24990, 1, 15, '[\"e6360a125298e584-airpods pro.jpeg\",\"63457c6f57ea3e28-airpods__ea3kvnhxv96q_large.jpg\"]'),
-(12, 'MacBook Pro', 'Apple M3 chip with 8-core CPU, 10-core GPU, 16-core Neural Engine\r\n8GB unified memory\r\n512GB SSD storage\r\n35.97 cm (14.2\") Liquid Retina XDR display²\r\n70W USB-C Power Adapter\r\nTwo Thunderbolt / USB 4 ports, HDMI port, SDXC card slot, headphone jack, MagSafe 3 port\r\nBacklit Magic Keyboard with Touch ID - US English', 180000, 3, 15, '[\"849a637c7937ea2c-mbp14-spacegray-gallery2-202310.jpeg\"]'),
-(13, 'iPhone 15 Pro', 'Apple iPhone 15 Pro mobile was launched on 12th September 2023. The phone comes with a 120 Hz refresh rate 6.10-inch touchscreen display offering a resolution of 1179x2556 pixels at a pixel density of 460 pixels per inch (ppi). Apple iPhone 15 Pro is powered by a hexa-core Apple A17 Pro processor. It comes with 8GB of RAM. The Apple iPhone 15 Pro supports wireless charging.', 134900, 5, 15, '[\"ac4ca9373341bf03-iphone-15-pro-finish-select-202309-6-1inch_AV1.jpeg\",\"ed373598efe6eec6-iphone-15-pro-finish-select-202309-6-1inch_AV2_GEO_EMEA.jpeg\"]');
+(16, 'Airpods Pro', 'Airpods Pro', 25000, 1, 1, '[\"58153739858f0d47-airpods__ea3kvnhxv96q_large.jpg\",\"bf222939f264fba9-airpods pro.jpeg\"]'),
+(17, 'Realme T300', 'Earbuds', 2300, 1, 1, '[\"73dc0a719934e16c-t300.webp\"]'),
+(21, 'jsdj', 'jksj', 2873, 1, 1, '[\"7c3fc6c2d8dd602b-t300.webp\"]'),
+(24, 'java', 'Pankaj', 2000, 22, 1, '[\"84b2875d1f98ac2d-airpods pro.jpeg\"]'),
+(25, 'java', 'python', 2000, 23, 40, '[\"f0048f1bb5a837f7-t300.webp\"]');
 
 -- --------------------------------------------------------
 
@@ -80,22 +109,16 @@ INSERT INTO `products` (`productId`, `productName`, `productDesc`, `productPrice
 
 CREATE TABLE `roles` (
   `roleId` tinyint(2) NOT NULL,
-  `roleName` tinytext NOT NULL,
-  `userId` smallint(5) NOT NULL
+  `roleName` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`roleId`, `roleName`, `userId`) VALUES
-(12, 'user', 15),
-(13, 'admin', 16),
-(14, 'user', 17),
-(15, 'user', 18),
-(16, 'user', 19),
-(17, 'user', 20),
-(18, 'user', 21);
+INSERT INTO `roles` (`roleId`, `roleName`) VALUES
+(1, 'Admin'),
+(2, 'User');
 
 -- --------------------------------------------------------
 
@@ -111,17 +134,11 @@ CREATE TABLE `users` (
   `password` text NOT NULL,
   `gender` enum('Male','Female') NOT NULL,
   `hobbies` tinytext NOT NULL,
-  `roleName` tinytext NOT NULL,
+  `roleId` smallint(5) NOT NULL,
   `profilePic` text NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `verified` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`userId`, `firstName`, `lastName`, `email`, `password`, `gender`, `hobbies`, `roleName`, `profilePic`, `createdAt`) VALUES
-(15, 'Pankaj', 'Kumar', 'pk@gmail.com', '$2b$10$55rC/0vt7jKhAU587fi3D.gJsGVYIDDzginsmvkJk0hpa9fTEYL9e', 'Male', 'Coding, Cricket, Gaming', 'user', '9b30a0ddeb804c2c-372497217777264 (1).png', '2024-04-10 11:19:00');
 
 --
 -- Indexes for dumped tables
@@ -131,7 +148,14 @@ INSERT INTO `users` (`userId`, `firstName`, `lastName`, `email`, `password`, `ge
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`categoryId`);
+  ADD PRIMARY KEY (`categoryId`),
+  ADD KEY `categoryId` (`categoryId`);
+
+--
+-- Indexes for table `otps`
+--
+ALTER TABLE `otps`
+  ADD PRIMARY KEY (`otpId`);
 
 --
 -- Indexes for table `products`
@@ -160,25 +184,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categoryId` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `categoryId` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `otps`
+--
+ALTER TABLE `otps`
+  MODIFY `otpId` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productId` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `productId` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `roleId` tinyint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `roleId` tinyint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `userId` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
