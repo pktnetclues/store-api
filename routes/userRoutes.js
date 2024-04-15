@@ -6,6 +6,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 const deleteUser = require("../controllers/users/deleteUser");
 const updateUser = require("../controllers/users/updateUser");
 const verifyUser = require("../controllers/users/verifyUser");
+const emailSendOTP = require("../controllers/users/emailSendForOTP");
 
 const userRoutes = express.Router();
 
@@ -17,6 +18,8 @@ userRoutes.post(
 );
 
 userRoutes.post("/verify/user", verifyUser);
+
+userRoutes.get("/sendotp/user", authMiddleware, emailSendOTP);
 
 // Login User
 userRoutes.post("/login/user", loginUser);

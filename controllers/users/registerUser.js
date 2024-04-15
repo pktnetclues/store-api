@@ -59,6 +59,7 @@ const registerUser = async (req, res) => {
 
     // Send OTP via email
     otpMailSender(firstName, email, otp, (error) => {
+      console.log("In Mails send");
       if (error) {
         console.error("Error sending email:", error);
         return res.status(500).json({ message: "Error sending email" });
