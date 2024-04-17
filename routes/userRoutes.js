@@ -19,7 +19,7 @@ userRoutes.post(
 
 userRoutes.post("/verify/user", verifyUser);
 
-userRoutes.get("/sendotp/user", authMiddleware, emailSendOTP);
+userRoutes.get("/sendotp/user", emailSendOTP);
 
 // Login User
 userRoutes.post("/login/user", loginUser);
