@@ -24,10 +24,6 @@ const getProductsByUser = async (req, res) => {
       );
     }
 
-    if (!productResult.length) {
-      return res.status(404).json({ message: "No products found" });
-    }
-
     return res
       .status(200)
       .json({ message: "success", products: productResult });

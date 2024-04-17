@@ -10,6 +10,7 @@ const generateSixDigitOTP = () => {
 const emailSendOTP = async (req, res) => {
   const email = req.user.email;
   const firstName = req.user.firstName;
+
   // Check if the user already exists
   const [existingUser] = await sequelize.query(
     `SELECT email FROM users WHERE email = :email`,
@@ -35,7 +36,6 @@ const emailSendOTP = async (req, res) => {
   });
 
   otpMailSender(firstName, email, otp, (error) => {
-    console.log("In Mails send");
     if (error) {
       console.error("Error sending email:", error);
       return res.status(500).json({ message: "Error sending email" });
